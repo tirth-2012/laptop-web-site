@@ -1,0 +1,75 @@
+{% extends "basemain.html" %}
+{% block body %}
+
+<style>
+    table,
+    tr,
+    td,
+    th {
+        border: 1px solid;
+    }
+</style>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin-top: 275px;">
+            <div class="section-title">
+                <h2>View cart</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Model Name</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart in cart_items %}
+                    <tr>
+                        <td>{{cart.name}}</td>
+                        <td>{{cart.modelname}}</td>
+                        <td><img src="{{cart.image}}" alt="IMG" width="100px" height="100px"></td>
+                        <td>{{cart.price}}</td>
+                        <td>
+                            <form method="post" action="{% url 'update_cart' cart.id 'decrease' %}"
+                                style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-light">-</button>
+                            </form>
+
+                            <span class="mx-4">{{ cart.quantity }}</span>
+
+                            <!-- Form for increasing quantity -->
+                            <form method="post" action="{% url 'update_cart' cart.id 'increase' %}"
+                                style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-light">+</button>
+                            </form>
+                        </td>
+                        <td>{{cart.total}}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="12" class="text-center">cart is empty</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div style="margin-bottom: 100px;">
+                <h3>Total amount: ₹{{total_price}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <button type="button" class="btn btn-primary"><a href="/checkout" style="color: white;">Checkout</a></button>
+</div>
+
+{% endblock body %}

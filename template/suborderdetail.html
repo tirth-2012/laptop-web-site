@@ -1,0 +1,25 @@
+{% extends "basemain.html" %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="section-title" style="margin-top: 275px;">
+            <h2>Sudorder Detail</h2>
+        </div>
+        {% for orders in order %}
+        <div class="col-lg-3 col-md-6 col-12 border border-2 me-5">
+            <div>
+                <img src="{{orders.image}}" alt="">
+            </div>
+            <div class="p-3">
+                <h6><strong>Brand:</strong>{{orders.name}}</h6>
+                <h6 class="mt-1"><strong>Modelname:</strong>{{orders.modelname}}</h6>
+                <p><strong>Price:</strong>{{orders.price}}</p>
+                <p><strong>Quantity:</strong>{{orders.quantity}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}

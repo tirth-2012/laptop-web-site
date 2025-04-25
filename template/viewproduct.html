@@ -1,0 +1,79 @@
+{% extends "basemain.html" %}
+{% block body %}
+<!-- Start Item Details -->
+<section class="item-details section">
+    <div class="container">
+        <div class="top-area" style="margin-top: 200px;">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="product-images">
+                        <main id="gallery">
+                            <div class="main-img">
+                                <img src="/{{product.image1}}" id="current" alt="#" width="100%" height="500px">
+                            </div>
+                            <div class="images">
+                                <img src="/{{product.image1}}" class="img" alt="#">
+                                <img src="/{{product.image2}}" class="img" alt="#">
+                                <img src="/{{product.image3}}" class="img" alt="#">
+                                <img src="/{{product.image4}}" class="img" alt="#">
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12 mt-5">
+                    <div class="product-info">
+                        <h2 class="title mb-3"><strong>Brand Name: </strong>{{product.name}}</h2>
+                        <!-- <p class="category"><i class="lni lni-tag"></i>Drones:<a href="javascript:void(0)">Action
+                                cameras</a></p> -->
+                        <h3 class="price mb-3"><strong>Model: </strong>{{product.modelname}}<span></span></h3>
+                        <h3 class="price mb-5"><strong>Price: </strong>₹{{product.price}}<span></span></h3>
+                        <p class="info-text mb-3"><strong>Details: </strong>{{product.detail}}</p>
+
+                        {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+
+                        <div class="bottom-content" style="margin-top: 100px;">
+                            <div class="row align-items-end">
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="button cart-button">
+                                        <a href="{% url 'addtocart' product.id %}" style="color: white; width: 100%;"><button class="btn" > Add to Cart</button></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <div class="wish-button">
+                                        <button class="btn"><i class="fa fa-heart"></i> To Wishlist</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Review Modal -->
+<script type="text/javascript">
+    const current = document.getElementById("current");
+    const opacity = 0.6;
+    const imgs = document.querySelectorAll(".img");
+    imgs.forEach(img => {
+        img.addEventListener("click", (e) => {
+            //reset opacity
+            imgs.forEach(img => {
+                img.style.opacity = 1;
+            });
+            current.src = e.target.src;
+            //adding class 
+            //current.classList.add("fade-in");
+            //opacity
+            e.target.style.opacity = opacity;
+        });
+    });
+</script>
+{% endblock body %}

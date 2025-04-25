@@ -1,0 +1,17 @@
+{% extends "basemain.html" %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin-top: 275px;">
+            <h2 class="text-center">Payment Successful 🎉</h2>
+            <p class="text-center">Thank you for your purchase! Your order has been successfully placed.</p>
+
+            <div class="text-center">
+                <a href="{% url 'index' %}" class="btn btn-primary mt-5">Return to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

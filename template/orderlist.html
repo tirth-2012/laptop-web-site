@@ -1,0 +1,38 @@
+{% extends "basemain.html" %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="margin-top: 275px;">
+            <div class="section-title">
+                <h2>Order List</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Customer Name</th>
+                        <th>Address</th>
+                        <th>Total</th>
+                        <th>Order Date</th>
+                        <th>View Suborder</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart in order %}
+                    <tr>
+                        <td>{{cart.user}}</td>
+                        <td>{{cart.full_name}}</td>
+                        <td>{{cart.house_society_name}},{{cart.landmark_area}}</td>
+                        <td>{{cart.total_price}}</td>
+                        <td>{{ cart.created_at }}</td>
+                        <td><a href="{% url 'suborderdetail' cart.id %}" class="btn btn-primary">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
